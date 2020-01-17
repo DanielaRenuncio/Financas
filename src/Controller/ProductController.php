@@ -18,7 +18,7 @@ class ProductController
        $pdo = Connection::getInstance();
 
       // $view = new View('site/single.phtml');
-      var_dump((new Product($pdo))->where(['name' => 'Nanderson', 'email' => 'nando']));
+      var_dump((new Product($pdo))->find(10));
 
        
     //   $product = new Product($pdo);

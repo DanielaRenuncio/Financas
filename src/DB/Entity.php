@@ -23,14 +23,9 @@ abstract class Entity
        return $get->fetchAll(PDO::FETCH_ASSOC);
    }
 
-   public function find(int $id)
+   public function find(int $id, $fields = '*')
    {
-       $sql = 'SELECT * FROM products WHERE id = :id';
-       $get = $this->conn->prepare($sql);
-       $get->bindValue(':id', $id, \PDO::PARAM_INT);
-       $get->execute();
-       //$get->rowCount(); //se quiser fazer a verificação se voltou algo
-       return $get->fetch(PDO::FETCH_ASSOC);
+      return current($this->where(['id' => $id], '', $fields));
        
    }
 
@@ -53,8 +48,8 @@ abstract class Entity
      
 
      foreach ($conditions as $k => $v){
-       gettype($v) == 'int' ? $get->bind(':' . $k,$v, \PDO::PARAM_INT) 
-                            : $get->bind(':' . $k,$v, \PDO::PARAM_STR) ;
+       gettype($v) == 'int' ? $get->bindValue(':' . $k,$v, \PDO::PARAM_INT) 
+                            : $get->bindValue(':' . $k,$v, \PDO::PARAM_STR) ;
      }
      
      $get->execute();
