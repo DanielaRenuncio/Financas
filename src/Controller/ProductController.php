@@ -17,8 +17,15 @@ class ProductController
        //é a conexão PDO
        $pdo = Connection::getInstance();
 
+  //     var_dump((new Product($pdo))->where(
+  //      ['category_id' => 2]
+//    ));
+
+
       // $view = new View('site/single.phtml');
-      var_dump((new Product($pdo))->find(10));
+      var_dump((new Product($pdo))->insert(
+            ['name' => 'Teste', 'price' => 19.99, 'amount'=>10, 'description' => 'Teste', 'slug' => 'slug']
+        ));
 
        
     //   $product = new Product($pdo);
