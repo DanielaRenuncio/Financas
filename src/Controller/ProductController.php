@@ -17,12 +17,14 @@ class ProductController
        //é a conexão PDO
        $pdo = Connection::getInstance();
 
-       $view = new View('site/single.phtml');
+      // $view = new View('site/single.phtml');
+      var_dump((new Product($pdo))->where(['name' => 'Nanderson', 'email' => 'nando']));
+
        
-       $product = new Product($pdo);
-       $view->product = $product->find($id);      
+    //   $product = new Product($pdo);
+     //  $view->product = $product->find($id);      
         
-       return $view->render(); 
+     //  return $view->render(); 
     }
 }
 
