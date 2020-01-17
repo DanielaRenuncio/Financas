@@ -51,7 +51,7 @@ abstract class Entity
     return $get->fetchAll(\PDO::FETCH_ASSOC);
      
    }
-
+ // *****************  INSERT **************************/
    public function insert($data)
    {
      $binds = array_keys($data);
@@ -64,6 +64,30 @@ abstract class Entity
 
      return $insert->execute();
    }
+
+   // *****************  UPDATE **************************/
+   public function update($data): bool
+	{
+		if(!array_key_exists('id', $data)) {
+			throw new \Exception('É preciso informar um ID válido para update!');
+		}
+
+		$sql = 'UPDATE ' . $this->table . ' SET ';
+
+		$set = null;
+		$binds = array_keys($data);
+
+		foreach($binds as $v) {
+			if($v !== 'id') {
+				$set .= is_null($set) ? $v . ' = :' . $v : ', ' .  $v . ' = :' . $v ;
+			}
+		}
+		$sql .= $set . ', updated_at = NOW() WHERE id = :id';
+
+		$update = $this->bind($sql, $data);
+
+		return $update->execute();
+	}
 
    private function bind($sql, $data)
    {

@@ -20,12 +20,16 @@ class ProductController
   //     var_dump((new Product($pdo))->where(
   //      ['category_id' => 2]
 //    ));
+  //  var_dump((new Product($pdo))->findAll());
+    var_dump((new Product($pdo))->update(
+        ['id' => 12, 'name' => 'Teste2', 'price' => 29.99, 'amount'=>11, 'description' => 'Teste', 'slug' => 'slug']
+    ));
 
 
       // $view = new View('site/single.phtml');
-      var_dump((new Product($pdo))->insert(
-            ['name' => 'Teste', 'price' => 19.99, 'amount'=>10, 'description' => 'Teste', 'slug' => 'slug']
-        ));
+   //   var_dump((new Product($pdo))->insert(
+   //         ['name' => 'Teste', 'price' => 19.99, 'amount'=>10, 'description' => 'Teste', 'slug' => 'slug']
+   //     ));
 
        
     //   $product = new Product($pdo);
