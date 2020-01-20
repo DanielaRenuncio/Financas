@@ -16,20 +16,20 @@ abstract class Entity
      $this->conn = $conn;
    }
 
-   public function findAll($fields = '*')
+   public function findAll($fields = '*'):array
    {
        $sql = 'SELECT ' . $fields . ' FROM ' . $this->table;
        $get = $this->conn->query($sql);
        return $get->fetchAll(PDO::FETCH_ASSOC);
    }
 
-   public function find(int $id, $fields = '*')
+   public function find(int $id, $fields = '*'):array
    {
       return current($this->where(['id' => $id], '', $fields));
        
    }
 
-   public function where(array $conditions, $operator= ' AND ', $fields = '*')
+   public function where(array $conditions, $operator= ' AND ', $fields = '*'):array
    {
      $sql = 'SELECT '. $fields . ' FROM ' . $this->table . ' WHERE ';
      $binds = array_keys($conditions);
@@ -52,7 +52,7 @@ abstract class Entity
      
    }
  // *****************  INSERT **************************/
-   public function insert($data)
+   public function insert($data):bool
    {
      $binds = array_keys($data);
      $fields = implode(', ', $binds);
@@ -87,7 +87,16 @@ abstract class Entity
 		$update = $this->bind($sql, $data);
 
 		return $update->execute();
-	}
+  }
+  
+   // *****************  DELETE **************************/
+   public function delete(int $id):bool
+   {
+     $sql = 'DELETE FROM '. $this->table . ' WHERE id = :id';
+     $delete = $this->bind($sql, ['id' => $id]); 
+
+     return $delete->execute();
+   }
 
    private function bind($sql, $data)
    {
