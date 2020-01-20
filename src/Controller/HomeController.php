@@ -12,12 +12,11 @@ class HomeController
     {
        //preciso para na instanciação desta classe um parâmetro que 
        //é a conexão PDO
-       $pdo = Connection::getInstance();
-        $products = new Product($pdo);
-       // var_dump($products->findAll());die;
+    //   $pdo = Connection::getInstance();
+       
+      
         $view = new View('site/index.phtml'); 
-        //estou mandando os produtos para a view
-        $view->products = $products->findAll();
+      
         return $view->render();
     }
 }

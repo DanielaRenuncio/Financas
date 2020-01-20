@@ -2,7 +2,7 @@
 <div class="container">
    <!-- Main component for a primary marketing message or call to action -->
    <div class="jumbotron">
-        <h1>Bem vindo ao Projeto 1</h1>
+        <h1>Gerenciador de Gastos Pessoais</h1>
         <p>
           Projeto criado  no curso PHP Orientado a Objetos da Code Experts learning.
         </p>
@@ -11,15 +11,7 @@
       </div>
 
       <div class="col-md-12">
-          <?php foreach ($this->products as $product): ?>
-            <div class="col-md-4">
-                <img src="http://via.placeholder.com/350x150?text=<?=$product['name']; ?>" alt="" class="img-responsive">
-                <h2><a href="<?=HOME;?>/product/<?=$product['id']; ?>"><?=$product['name']; ?></a></h2>
-                <p><?=$product['description']; ?></p>
-                <p><?=number_format($product['price'],2,',','.'); ?></p>
-            </div>
-
-          <?php endforeach; ?>
+        
       </div>
 
 </div>
